@@ -12,7 +12,7 @@ export default function App() {
   const [Valor, setValor] = useState ('Carregando...');
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(doc(bancoExterno, "Estoque", "1"), (snap) => {
+    const unsubscribe = onSnapshot(doc(bancoExterno, "Estoque", "3"), (snap) => {
       setMarca(snap.data()?.Marca);
       setModelo(snap.data()?.Modelo);
       setValor(snap.data()?.Valor);
@@ -24,14 +24,12 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={{ fontSize: 25 }}>Informação: </Text>
-      <Text style={{ fontSize: 25 }}>Marca: {Marca} </Text>
-      <Text style={{ fontSize: 25 }}>Modelo: {Modelo} </Text>
-      <Text style={{ fontSize: 25 }}>Valor: {Valor} </Text>
+      <Text style={{ fontSize: 25, marginBottom: 40, backgroundColor: '#F93', padding: 10, borderRadius: 10 }}>Informação: </Text>
+      <Text style={{ fontSize: 25, marginBottom: 10 ,backgroundColor: '#BC6', padding: 8, borderRadius: 10 }}>Marca: {Marca} </Text>
+      <Text style={{ fontSize: 25, marginBottom: 10 ,backgroundColor: '#BC6', padding: 8, borderRadius: 10 }}>Modelo: {Modelo} </Text>
+      <Text style={{ fontSize: 25, marginBottom: 10 ,backgroundColor: '#BC6', padding: 8, borderRadius: 10 }}>Valor: {Valor} </Text>
 
-      <TouchableOpacity style={{ backgroundColor: "#F94", marginTop: 20, borderRadius: 5, padding: 10 }}>
-        <Text style={{ fontSize: 20, paddingHorizontal: 15 }}>Adicionar</Text>
-      </TouchableOpacity>
+
       <StatusBar style="auto" />
     </View>
   );
