@@ -7,19 +7,28 @@ import { doc, onSnapshot } from 'firebase/firestore';
 
 export default function App() {
 
-  const [nome, setNome] = useState('Carregando...');
+  const [Marca, setMarca] = useState('Carregando...');
+  const [Modelo, setModelo] = useState ('Carregando...');
+  const [Valor, setValor] = useState ('Carregando...');
 
   useEffect(() => {
-    onSnapshot(doc(bancoExterno, "/", "/"), (snap) => {
-      setNome(snap.data()?.Geladeira)
+    const unsubscribe = onSnapshot(doc(bancoExterno, "Estoque", "1"), (snap) => {
+      setMarca(snap.data()?.Marca);
+      setModelo(snap.data()?.Modelo);
+      setValor(snap.data()?.Valor);
     });
-
-
-  }, [])
+  
+    return () => unsubscribe();
+  }, []);
+  
 
   return (
     <View style={styles.container}>
-      <Text style={{ fontSize: 25 }}>Informação: {nome}</Text>
+      <Text style={{ fontSize: 25 }}>Informação: </Text>
+      <Text style={{ fontSize: 25 }}>Marca: {Marca} </Text>
+      <Text style={{ fontSize: 25 }}>Modelo: {Modelo} </Text>
+      <Text style={{ fontSize: 25 }}>Valor: {Valor} </Text>
+
       <TouchableOpacity style={{ backgroundColor: "#F94", marginTop: 20, borderRadius: 5, padding: 10 }}>
         <Text style={{ fontSize: 20, paddingHorizontal: 15 }}>Adicionar</Text>
       </TouchableOpacity>
